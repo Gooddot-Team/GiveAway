@@ -1,0 +1,74 @@
+{% include 'header.html' %}
+
+<body>
+
+  {% include 'nav.html' %}
+
+  <div class="container-fluid">
+    <div class="row">
+
+      {% include 'sidebar.html' %}
+
+      <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Click on start to run Giveaway</h1>
+        <button class="btn btn-primary" style="float: right;" type="button" data-toggle="collapse"
+          data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          New Giveaway
+        </button>
+        <h3>{{message}}</h3>
+      </div>
+
+
+
+      <div class="collapse" id="collapseExample">
+
+        <form class="form-signin" action="/run" method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Giveaway Image</label>
+            <input class="form-control" type="file" id="formFile" name="file"> <br>
+          </div>
+          <label for="inputUsername" class="form-label">Giveaway Name</label>
+          <input type="text" name="giveaway" id="giveaway" class="form-control" placeholder="List Name" required
+            autofocus>
+          <br>
+          <label for="inputUsername" class="form-label">Winner Quantity</label>
+          <input type="number" name="quantity" id="quantity" class="form-control" placeholder="Winner Quantity" required
+            autofocus>
+          <br>
+          <label for="inputUsername" class="form-label">Select List for Giveaway</label>
+
+          <select class="custom-select" aria-label="Default select example" style="font-size: 20px;" name="lists">
+            {% for list in lists %}
+            <option value="{{list['listname']}}">{{list['listname']}}</option>
+            {% endfor %}
+
+          </select>
+          <br>
+          <br>
+          <button class="btn btn-lg btn-success btn-block" type="submit">Make Giveaway</button>
+        </form>
+
+
+      </div>
+      <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-2 main" style="overflow-x: hidden;">
+        <div class="container-fluid">
+          <div class="row">
+
+            {% for ga in giveaway %}
+            <div class="col-md-4 p-2" style="padding:5px;">
+              <div class="">
+                <img src="public/{{ga['filename']}}" alt="..." width="250">
+                <div class="">
+                  <h5 class="">{{ga['giveaway']}}</h5>
+                  <a href="play/{{ga['id']}}" class="btn btn-success">Play</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}

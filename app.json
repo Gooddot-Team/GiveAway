@@ -1,0 +1,19 @@
+{
+    "name": "GiveAway Dashboard",
+    "description": "A flask app for GiveAway",
+    "repository": "https://github.com/NoobKittu/GiveAway",
+    "logo": "https://cdn.shopify.com/s/files/1/0614/3282/4035/files/logo_good_dot_with_r_67_-01_135x.png",
+    "keywords": ["flask", "GiveAway", "static"],
+    "buildpacks": [
+        {
+          "url": "heroku/python"
+        }
+      ],
+     "env": {
+        "MONGO_DB": {
+           "description": "Your mongo db url",
+           "required": true,
+           "value": ""
+        }
+    }
+  }

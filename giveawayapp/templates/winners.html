@@ -1,0 +1,185 @@
+<html>
+
+<head>
+    <title>{{name}} Giveaway</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+       
+<style>
+    body {
+        font-family: 'Roboto';
+        margin: 0;
+        padding: 0;
+      }
+      
+      @keyframes confetti-slow {
+        0% { transform: translate3d(0, 0, 0) rotateX(0) rotateY(0); }
+        
+        100% { transform: translate3d(25px, 105vh, 0) rotateX(360deg) rotateY(180deg); }
+      }
+      
+      @keyframes confetti-medium {
+        0% { transform: translate3d(0, 0, 0) rotateX(0) rotateY(0); }
+        
+        100% { transform: translate3d(100px, 105vh, 0) rotateX(100deg) rotateY(360deg); }
+      }
+      
+      @keyframes confetti-fast {
+        0% { transform: translate3d(0, 0, 0) rotateX(0) rotateY(0); }
+        
+        100% { transform: translate3d(-50px, 105vh, 0) rotateX(10deg) rotateY(250deg); }
+      }
+      
+      .container {
+        width: 100vw;
+        height: 100vh;
+        background: #ffffff;
+        border:1px solid white;
+        display:fixed;
+        top:0px;
+      }
+      
+      .confetti-container {
+        perspective: 700px;
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+      
+      .confetti {
+        position: absolute;
+        z-index: 1;
+        top: -10px;
+        border-radius: 0%;
+      }
+      .confetti--animation-slow {
+        animation: confetti-slow 2.25s linear 1 forwards;
+      }
+      .confetti--animation-medium {
+        animation: confetti-medium 1.75s linear 1 forwards;
+      }
+      .confetti--animation-fast {
+        animation: confetti-fast 1.25s linear 1 forwards;
+      }
+      
+      
+      
+      
+      
+      /* Checkmark */
+      .checkmark-circle {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .checkmark-circle .background {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-image: url(../public/{{filename}});
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+      }
+ 
+</style>
+</head>
+<body>
+    <div class="js-container container" style="top:0px !important;"></div>
+
+    <div style="text-align:center;margin-top:30px;position:  fixed; overflow:scroll; width:100%;height:100%;top:0px;left:0px;">
+      <div class="checkmark-circle">
+        <div class="background"></div>
+      </div>
+      <h1>Congratulations!</h1>
+      <p>you're lucky! Won this giveaway!</p>
+      <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Winners</th>
+            <th scope="col">Giveaway Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for winners in wins %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{winners}}</td>
+            <td>{{giveaway}}</td>
+            </td>
+          </tr>
+           {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    </div>  
+  
+    
+  <script>
+    const Confettiful = function(el) {
+        this.el = el;
+        this.containerEl = null;
+        
+        this.confettiFrequency = 3;
+        this.confettiColors = ['#EF2964', '#00C09D', '#2D87B0', '#48485E','#EFFF1D'];
+        this.confettiAnimations = ['slow', 'medium', 'fast'];
+        
+        this._setupElements();
+        this._renderConfetti();
+      };
+      
+      Confettiful.prototype._setupElements = function() {
+        const containerEl = document.createElement('div');
+        const elPosition = this.el.style.position;
+        
+        if (elPosition !== 'relative' || elPosition !== 'absolute') {
+          this.el.style.position = 'relative';
+        }
+        
+        containerEl.classList.add('confetti-container');
+        
+        this.el.appendChild(containerEl);
+        
+        this.containerEl = containerEl;
+      };
+      
+      Confettiful.prototype._renderConfetti = function() {
+        this.confettiInterval = setInterval(() => {
+          const confettiEl = document.createElement('div');
+          const confettiSize = (Math.floor(Math.random() * 3) + 7) + 'px';
+          const confettiBackground = this.confettiColors[Math.floor(Math.random() * this.confettiColors.length)];
+          const confettiLeft = (Math.floor(Math.random() * this.el.offsetWidth)) + 'px';
+          const confettiAnimation = this.confettiAnimations[Math.floor(Math.random() * this.confettiAnimations.length)];
+          
+          confettiEl.classList.add('confetti', 'confetti--animation-' + confettiAnimation);
+          confettiEl.style.left = confettiLeft;
+          confettiEl.style.width = confettiSize;
+          confettiEl.style.height = confettiSize;
+          confettiEl.style.backgroundColor = confettiBackground;
+          
+          confettiEl.removeTimeout = setTimeout(function() {
+            confettiEl.parentNode.removeChild(confettiEl);
+          }, 3000);
+          
+          this.containerEl.appendChild(confettiEl);
+        }, 25);
+      };
+      
+      window.confettiful = new Confettiful(document.querySelector('.js-container'));
+      
+      
+      
+  </script>
+  
+
+
+</body>
+</html>

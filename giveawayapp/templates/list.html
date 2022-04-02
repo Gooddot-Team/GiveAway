@@ -1,0 +1,58 @@
+
+{% include 'header.html' %}
+
+<body>
+
+{% include 'nav.html' %}
+
+  <div class="container-fluid">
+    <div class="row">
+
+{% include 'sidebar.html' %}  
+
+      <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Add List of Users</h1>
+        <button class="btn btn-primary" style="float: right;" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          New List
+      </button>
+      </div>
+
+      <div class="collapse" id="collapseExample">
+
+      <form class="form-signin" action="/list" method="post">  
+        <label for="inputUsername" class="form-label">List Name</label>
+        <input type="text" name="listname" id="listname" class="form-control" placeholder="List Name" required autofocus>
+  <br>
+        <label for="inputEmail" class="form-label">List</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  name="lists"></textarea>
+<br>
+        <button class="btn btn-lg btn-success btn-block" type="submit">Add List</button>
+      </form>  
+      </div>
+      <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Username</th>
+              <th scope="col">ListName</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for list in lists %}
+            <tr>
+              <th scope="row">{{loop.index}}</th>
+              <td>{{list['username']}}</td>
+              <td>{{list['listname']}}</td>
+              <td> <a href="edit/{{list['id']}}">edit</a>             
+              </td>
+            </tr>
+             {% endfor %}
+          </tbody>
+        </table>
+</div>
+    </div>
+  </div>
+
+{% include 'footer.html' %}

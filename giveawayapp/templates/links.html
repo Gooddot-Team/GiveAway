@@ -1,0 +1,3 @@
+    <li {%- if request.path == "/home" %} class="active"{% endif %}><a href="{{ url_for('home') }}">Home </a></li>
+    <li {%- if request.path == "/list" %} class="active"{% endif %}><a href="{{ url_for('list') }}">Giveaway List</a></li>
+    <li {%- if request.path == "/run" %} class="active"{% endif %}><a href="{{ url_for('run') }}">Play Giveaway</a></li>
