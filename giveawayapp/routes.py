@@ -77,7 +77,7 @@ def run():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            UPLOAD_FOLDER = './giveawayapp/public/'
+            UPLOAD_FOLDER = './giveawayapp/public/images/'
             file.save(os.path.join(UPLOAD_FOLDER, filename))
 
         giveaway = Giveaway(giveaway=request.form.get('giveaway'), username = current_user.username, lists=request.form.get('lists'), filename = filename, quantity=request.form.get('quantity'))
@@ -150,3 +150,12 @@ def play(id):
 
 
     return render_template('play.html', name = name, filename=filename, listname =listname, lists= lists, id=id, quantity=quantity, items=wins)
+
+    
+@app.route('/delete/<string:id>', methods=['GET', 'POST'])
+@login_required
+def delete(id):
+    identifier = Giveaway.objects(id=id).first()
+    identifier.delete()
+
+    return render_template('run.html')

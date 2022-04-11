@@ -181,16 +181,12 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="../public/{{filename}}" width="100%">
+                            <img src="../public/images/{{filename}}" width="100%">
                         </div>
                         <div class="col-md-6">
                             <h2>{{name}} Giveaway</h2>
                             <h5>list selected {{listname}}</h5>
-                            <p>Quantity
-                                {% for item in items %}
-                                   {{item}}
-                                {% endfor %}
-
+                            <p>Quantity - {{quantity}}
                             </p>
                         </div>
                     </div>

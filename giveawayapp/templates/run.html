@@ -57,10 +57,11 @@
             {% for ga in giveaway %}
             <div class="col-md-4 p-2" style="padding:5px;">
               <div class="">
-                <img src="public/{{ga['filename']}}" alt="..." width="250">
+                <img src="public/images/{{ga['filename']}}" alt="..." width="250">
                 <div class="">
                   <h5 class="">{{ga['giveaway']}}</h5>
                   <a href="play/{{ga['id']}}" class="btn btn-success">Play</a>
+                  <a href="delete/{{ga['id']}}" class="btn btn-warning">Delete</a>
                 </div>
               </div>
             </div>
