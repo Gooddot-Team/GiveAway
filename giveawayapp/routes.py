@@ -156,6 +156,10 @@ def play(id):
 @login_required
 def delete(id):
     identifier = Giveaway.objects(id=id).first()
-    identifier.delete()
+    winnerdelete = Winners.objects(iden=id).first()
+    if identifier:
+        identifier.delete()
+    if winnerdelete:
+        winnerdelete.delete()
 
     return render_template('run.html')
