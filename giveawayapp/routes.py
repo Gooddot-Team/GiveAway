@@ -159,7 +159,8 @@ def delete(id):
     winnerdelete = Winners.objects(iden=id).first()
     if identifier:
         identifier.delete()
-    if winnerdelete:
-        winnerdelete.delete()
+        if winnerdelete:
+             winnerdelete.delete()
+        return redirect(url_for('run'))
 
     return render_template('run.html')
